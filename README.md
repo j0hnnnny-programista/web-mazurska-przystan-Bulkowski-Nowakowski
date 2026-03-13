@@ -63,3 +63,4 @@ Zadania:
 - Każdy kod musi przejść przez **Pull Request**, który zatwierdza druga osoba z pary.
 - Po każdym `git push` sprawdźcie, czy na Discordzie (kanał #feed-github) pojawiło się powiadomienie.
 --------------
+
