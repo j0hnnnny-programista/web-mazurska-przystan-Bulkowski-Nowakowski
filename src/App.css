@@ -10,7 +10,9 @@ html{
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
-  background: #008080;
+  background: #ADE8F4;
+  color: black;
+  opacity: 0.9;
   border-radius:20px;
   border: 5px solid #ff7f00;
   scale: 1.1;

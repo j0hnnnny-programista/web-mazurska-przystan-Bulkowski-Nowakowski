@@ -20,12 +20,12 @@ function App() {
                 </label>
                 <br/>
                 <label><p>Godziny</p><input type={'range'} name={'hours'}/></label>
-                <h2>Extras</h2>
+                <h2>Dodatki</h2>
                 <label>Kapok dla dziecka (5zł)<input type={'checkbox'} name={'kapok'}/>
                     <br/>
                     Opieka instruktora(50zł/h)<input type={'checkbox'} name={'instructor'}/>
                 </label>
-                <h2>Payment</h2>
+                <h2>Płatność</h2>
                 <label>
                     Karta <input type={'radio'} name={'payment'} value={'card'}/><br/>
                     BLIK <input type={'radio'} name={'payment'} value={'blik'}/><br/>
