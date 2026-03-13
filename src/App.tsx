@@ -13,9 +13,9 @@ function App() {
                 <label>
                     Wybierz typ łodzi:<br/>
                     <select name={"boat"} id='boat'>
-                        <option value={'kajak'}>Kajak(20zł/h)</option>
-                        <option value={'waterbike'}>Rower wodny(35zł/h)</option>
-                        <option value={'omega'}>Omega(150zł/h)</option>
+                        <option value={'kajak'} id={'kajak'}>Kajak(20zł/h)</option>
+                        <option value={'waterbike'} id={'waterbike'}>Rower wodny(35zł/h)</option>
+                        <option value={'omega'} id={'omega'}>Omega(150zł/h)</option>
                     </select>
                 </label>
                 <br/>
@@ -48,6 +48,8 @@ function App() {
                 <p id={'czykapok'}></p>
                 <h5>Opieka instruktora</h5>
                 <p id={'opieka instuktora'}></p>
+                <h5>Metoda płatności</h5>
+                <p id={'metoda'}></p>
                 <h4>Cena końcowa</h4>
                 <p id={'price'}></p>
 
