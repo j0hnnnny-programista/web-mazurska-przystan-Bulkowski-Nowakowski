@@ -3,8 +3,12 @@ import './App.css'
 function App() {
     return (
         <>
+            <h1>Wybierz swój rejs</h1>
+        <main>
+
+            <div id={'form'}>
+                <h2>Formularz</h2>
             <form>
-                <h1>Wybierz swój rejs</h1>
                 <label>Imie:<br/> <input type={'text'} name={'name'}/></label><br/>
                 <label>
                     Wybierz typ łodzi:<br/>
@@ -28,11 +32,29 @@ function App() {
                 </label>
 
                 <label><h5>Zapoznałem się z regulaminem <input type={'checkbox'} value={'regulamin'}/></h5></label>
-
-
-
             </form>
-        </>
+            </div>
+            <div id={'answer'}>
+            <h2>
+                Twój rejs
+            </h2>
+                <h5>Twoje imię:</h5>
+                <p id={'yourname'}>Johnny</p>
+                <h5>Twoja łódź</h5>
+                <p id={'yourboat'}>ta co wybrałem</p>
+                <h5>Ilość godzin</h5>
+                <p id={'amounthours'}>np.20</p>
+                <h5>Kapok dla dziecka</h5>
+                <p id={'czykapok'}>tak/nie</p>
+                <h5>Opieka instruktora</h5>
+                <p id={'opieka instuktora'}>tak/nie</p>
+                <h4>Cena końcowa</h4>
+                <p id={'price'}>np 2000zł</p>
+
+            </div>
+        </main>
+            </>
+
     )
 }
 
