@@ -3,6 +3,7 @@ html{
   height: 100vh;
   background-size: cover;
   background-position: center;
+  scale:0.9;
 }
 #root {
   max-width: 1000px;
@@ -12,6 +13,7 @@ html{
   background: #008080;
   border-radius:20px;
   border: 5px solid #ff7f00;
+  scale: 1.1;
 
 
 }
