@@ -3,7 +3,7 @@ import './App.css'
 function App() {
     return (
         <>
-            <h1>Wybierz swój rejs</h1>
+            <h1>Wybierz swój Rejs</h1>
         <main>
 
             <div id={'form'}>
@@ -19,7 +19,7 @@ function App() {
                     </select>
                 </label>
                 <br/>
-                <label>Godziny <br/> <input type={'range'} name={'hours'}/></label>
+                <label><p>Godziny</p><input type={'range'} name={'hours'}/></label>
                 <h2>Extras</h2>
                 <label>Kapok dla dziecka (5zł)<input type={'checkbox'} name={'kapok'}/>
                     <br/>
@@ -32,11 +32,13 @@ function App() {
                 </label>
 
                 <label><h5>Zapoznałem się z regulaminem <input type={'checkbox'} value={'regulamin'}/></h5></label>
+
+                <button type={'submit'}>Wyślij</button>
             </form>
             </div>
             <div id={'answer'}>
             <h2>
-                Twój rejs
+                Twój Rejs
             </h2>
                 <h5>Twoje imię:</h5>
                 <p id={'yourname'}></p>
