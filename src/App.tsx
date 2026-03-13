@@ -39,17 +39,17 @@ function App() {
                 Twój rejs
             </h2>
                 <h5>Twoje imię:</h5>
-                <p id={'yourname'}>Johnny</p>
+                <p id={'yourname'}></p>
                 <h5>Twoja łódź</h5>
-                <p id={'yourboat'}>ta co wybrałem</p>
+                <p id={'yourboat'}></p>
                 <h5>Ilość godzin</h5>
-                <p id={'amounthours'}>np.20</p>
+                <p id={'amounthours'}></p>
                 <h5>Kapok dla dziecka</h5>
-                <p id={'czykapok'}>tak/nie</p>
+                <p id={'czykapok'}></p>
                 <h5>Opieka instruktora</h5>
-                <p id={'opieka instuktora'}>tak/nie</p>
+                <p id={'opieka instuktora'}></p>
                 <h4>Cena końcowa</h4>
-                <p id={'price'}>np 2000zł</p>
+                <p id={'price'}></p>
 
             </div>
         </main>
