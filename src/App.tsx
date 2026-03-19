@@ -41,6 +41,7 @@ function App() {
                   <option value={'waterbike'}>Rower wodny(35zł/h)</option>
                   <option value={'omega'}>Omega(150zł/h)</option>
                 </select>
+                {boat === 'omega' && <p>⚠️ Wymagany patent żeglarski!</p>}
               </label>
               <br/>
               <label>Godziny: {hours} <br/> <input type={'range'} name={'hours'} min={1} max={8} step={1} value={hours} onChange={(e) => setHours(Number(e.target.value))}/></label>
