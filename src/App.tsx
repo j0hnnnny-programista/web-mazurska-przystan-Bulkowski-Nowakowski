@@ -43,7 +43,7 @@ function App() {
                 <select name={'boat'} id='boat' value={boat} onChange={(e) => setBoat(e.target.value)}>
                   <option value={'kajak'}>Kajak(20zł/h)</option>
                   <option value={'waterbike'}>Rower wodny(35zł/h)</option>
-                  <option value={'omega'}>Omega(150zł/h)</option>
+                  <option id={'omega1'} value={'omega'}>Omega(150zł/h)</option>
                 </select>
                 {boat === 'omega' && <p>⚠️ Wymagany patent żeglarski!</p>}
               </label>

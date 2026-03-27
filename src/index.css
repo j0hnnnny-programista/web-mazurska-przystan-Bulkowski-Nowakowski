@@ -12,6 +12,9 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+#omega1{
+  background: goldenrod;
+}
 
 a {
   font-weight: 500;
