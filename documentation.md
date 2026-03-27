@@ -6,97 +6,82 @@
 
 ---
 ## 1. Wymagania klienta
-* Formularz pobiera dane z klienta:
-  * Imie klienta
-  * Wybór sprzęta, między Kajakiem (20zł/h), Rowerem Wodnym (35zł/h), Żaglówka omega (150zł/h)
-  * Przez ile godzin chcę się wynając sprzęt
-  * Opcja kapoka dla dziecka za 5zł
-  * Instruktor za 50zł/h
-  * Wybór płatności
-  * Akceptowanie regulaminu
-* Nie da się przesłać formularz jeżeli nie wypełniłeś:
-    * Imie nazwisko
-    * Wybór płatności
-    * Zaakceptowanie regulaminu
-* Po wybieraniu Żaglówce Omega, użytkownikowi wyświetla się tekst o wymaganym patencie.
-* Cena jest obliczona.
-* Cena się aktualizuje wraz z wyborami jakimi robi użytkownik.
+* Formularz pobiera dane od klienta:
+  * Imię klienta
+  * Wybór sprzętu: Kajak (20zł/h), Rower wodny (35zł/h), Omega (150zł/h)
+  * Liczba godzin wypożyczenia (1-8)
+  * Opcja kapoka dla dziecka (+5zł)
+  * Opcja instruktora (+50zł/h)
+  * Wybór płatności (Karta lub BLIK)
+  * Akceptacja regulaminu
+* Po wybraniu łodzi Omega pojawia się informacja o wymaganym patencie żeglarskim.
+* Cena jest obliczana automatycznie na podstawie aktualnych wyborów użytkownika.
+* Po prawej stronie formularza wyświetlane jest bieżące podsumowanie rejsu.
+* Przycisk "Rezerwuję" jest aktywny dopiero po podaniu imienia i zaakceptowaniu regulaminu.
 
 ---
 ## 2. Architektura rozwiązania
-Architektura i budowa strony się znajduje się w App.tsx, a wygląd w App.css.
+Architektura i logika strony znajduje się w `App.tsx`, a wygląd w `App.css`.
 
-App.tsx jest podielony w następny sposób:
+`App.tsx` jest podzielony w następujący sposób:
 
-* Na początku sa podane useStates które są używane które są podzielone na 3 sekcje
-  * UseState które pobieraja dane z forumlarza
-  * Cena ostateczna obliczona przez funkcje priceCalculate()
-  * Właściwości niektóryś elementów strony
-* Następująco są Metody i funkcje applikacji
-  * Pierw jest handle gdy się naciska Submit
-  * Potem handles na gdy się zmieniają wartości w formularzu.
-  * Potem calculatPrice, co oblicza cenę ostateczną,<br> argumenty są wszystkie wartości  które zmieniają cenę w jakiś sposób
-  * Potem jest funkcja disableButtonCheck() która sprawdza czy odpowiednia pole są wypełnione aby submit był enabled
-  * Ostatecznie jest submitAlert() który jest wywołany przy funkcji handleSubmit. Pokazuje alert gdy się naciska submit.
-* Wkraczamy teraz do wygląd aplikacji.
-* Formularz jest formatowany w następujący sposób
-  * Imie
-  * Sprzęt
-  * [Opcjonalne] Informacje o patencie
-  * Wyświetlona ilość godzin
-  * Slider do wybierania ilość godzin
-  * [Checkbox] Opcjonalny wybory do dokupienia
-  * Wybór płatności
-  * Przycisk do akceptowania regulaminu
-  * informacja o cenie i wyświetlona ostateczna cena
-  * Button Submit
+* Na początku zdefiniowane są stany `useState` dla wszystkich pól formularza.
+* Następnie zdefiniowane są metody i funkcje aplikacji:
+  * `calculatePrice()` - wylicza cenę końcową na podstawie wybranego sprzętu, godzin i dodatków.
+  * `handleSubmit()` - zatrzymuje domyślne wysłanie formularza i pokazuje komunikat `alert`.
+* Każde pole formularza jest kontrolowane przez React (`value`/`checked` + `onChange`).
+* Widok aplikacji składa się z dwóch sekcji:
+  * Lewa sekcja: formularz rezerwacji.
+  * Prawa sekcja: podsumowanie danych wpisywanych przez użytkownika.
 
 ---
 ## 3. Zarządzanie stanem (`useState`)
-| Nazwa zmiennej stanu | Typ danych | Za co odpowiada?                                            |
-|:---------------------|:-----------|:------------------------------------------------------------|
-| nameInput            | string     | Przechowuje imię klienta                                    |
-| rideSelect           | string     | Przechowuje wybór sprzętu                                   |
-| timeRange            | string     | Przechowuje wybór godzin wyporzyczenia sprzętu              |
-| lsuitCheckBox        | boolean    | Przechowuje wybór o dokupienie kapoka dla dziecka           |
-| instructorCheckBox   | boolean    | Przechowuje wybór o dokupienie instruktora                  | 
-| paymentMethod        | string     | Przechowuje wybór o rodzaj płatności                        | 
-| statuteCheckBox      | boolean    | Przechowuje informacje czy regulamin został zaakceptowany   | 
-| price                | number     | Przechowuje ostateczna cena                                 | 
-| patentVisibility     | string     | Przechowuje jaki display ma [p] o className="Patent"        |  
-| submitDisable        | boolean    | Przechowuje czy button submit jest [disabled] lub [enabled] |  
-| submitBackground     | string     | Przechowuje jaki [color] ma button submit                   |  
+| Nazwa zmiennej stanu | Typ danych | Za co odpowiada? |
+|:---------------------|:-----------|:-----------------|
+| name                 | string     | Przechowuje imię klienta |
+| boat                 | string     | Przechowuje wybór łodzi (`kajak`, `waterbike`, `omega`) |
+| hours                | number     | Przechowuje liczbę godzin wypożyczenia |
+| kapok                | boolean    | Informuje, czy wybrano kapok dla dziecka |
+| instructor           | boolean    | Informuje, czy wybrano opiekę instruktora |
+| payment              | string     | Przechowuje metodę płatności (`card` lub `blik`) |
+| regulamin            | boolean    | Informuje, czy zaakceptowano regulamin |
 
 ---
 ## 4. Algorytm obliczania ceny
 
-* **Cena bazowa:** Zależna od wybranego sprzętu
-  * Kajak: 20zł / h
-  * Rower Wodny: 35zł / h
-  * Omega: 150zł / h
-* **Wpływ godzin:** Cena bazowa potem jest pomnożona przez ilość godzin wybranych
-* **Opcje dodatkowe:** Mamy 2 opcje do wybrania
-  *  Instruktor kosztuje 50zł, co jest potem pomnożone przez ilość godzin wybranych poprzednio
-  * Kapoki kosztują stałe 5zł, nie są przez nic pomnożone i jest dodane do końcowej ceny
+* **Cena bazowa:** zależna od wybranego sprzętu:
+  * Kajak: 20zł/h
+  * Rower wodny: 35zł/h
+  * Omega: 150zł/h
+* **Wpływ godzin:** cena bazowa jest mnożona przez liczbę godzin.
+* **Opcje dodatkowe:**
+  * Instruktor: +50zł za każdą godzinę.
+  * Kapok dla dziecka: stałe +5zł.
+* **Wzór logiczny:**
+  * `total = cena_lodzi * godziny`
+  * `+ 5`, jeśli wybrano kapok
+  * `+ 50 * godziny`, jeśli wybrano instruktora
+
 ---
 ## 5. Layout i Stylizacja (`Flexbox`)
-(Opisz, jakich właściwości `Flexbox` użyliście, aby formularz był responsywny i wyśrodkowany.
-Wymień co najmniej 3 właściwości CSS).
-1. `display: flex` - ładnie układa elementy i je wyrównuje
-2. `flex-direction: column` - ładnie ustawia elementy jeden pod drugim
-3. `justify-content: center` - wyrównuje elementy w poziomie
+W aplikacji wykorzystano głównie style z `App.css` do ułożenia formularza i podsumowania obok siebie oraz do nadania klimatu projektu.
+
+1. `display: flex` (w `main`) - ustawia sekcję formularza i podsumowania w jednym rzędzie.
+2. `max-width: 1000px` + `margin: 0 auto` (w `#root`) - centruje główny kontener na stronie.
+3. `background-image`, `background-size: cover`, `background-position: center` (w `html`) - tworzy tło strony ze zdjęciem przystani.
+
 ---
 ## 6. Wnioski z realizacji projektu (SDLC)
 (Krótka autorefleksja zespołu).
-* **Co było najtrudniejsze?** 
-  * Mikołaj: Zmiana ceny wraz z wyborami
-  * Bartek: Ustawienie w css aby ładnie wyglądało
+* **Co było najtrudniejsze?**
+  * Michał: Zmiana ceny wraz z wyborami
+  * Janek: Ustawienie w css aby ładnie wyglądało
 * **Czego nowego się nauczyliście?**
-  * Mikołaj: Fajne sposoby do zastosowania useState
-  * Bartek: Jak ładnie ułożyć wygląd strony
+  * Michał: Fajne sposoby do zastosowania useState
+  * Janek: Jak ładnie ułożyć wygląd strony
 * **Co byście zmienili, gdybyście mieli więcej czasu?**
-  * Mikołaj: "Interaktywność" strony, aby nie była taka statyczna bardzo
-  * Bartek: Upiększyłbym wygląd, dodał obrazki
+  * Michał: "Interaktywność" strony, aby nie była taka statyczna bardzo
+  * Janek: Upiększyłbym wygląd, dodał obrazki
 ---
 ## 7. Checklisty
 - [x] Aplikacja uruchamia się bez błędów (npm start).
