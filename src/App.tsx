@@ -28,6 +28,7 @@ function App() {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     alert('Dziękujemy za rezerwację!')
+    window.location.reload()
   }
 
   return (
